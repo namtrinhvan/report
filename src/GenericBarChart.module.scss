@@ -1,0 +1,80 @@
+/* GenericBarChart.module.scss */
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: white;
+  padding: 24px; /* Tăng padding chút cho thoáng */
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+}
+
+.header {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.25rem; /* 20px */
+  font-weight: 700;
+  color: #111827; /* Gray-900 */
+  line-height: 1.4;
+}
+
+.controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+
+  button, select, input {
+    font-family: inherit;
+    font-size: 0.875rem;
+  }
+}
+
+.chartContainer {
+  width: 100%;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.echartsInstance {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+/* --- Style cho phần Insights --- */
+.insightBox {
+  margin-top: 24px;
+  padding: 16px;
+  background-color: #F0F9FF; /* Sky-50: Màu nền xanh rất nhạt hiện đại */
+  border: 1px solid #BAE6FD; /* Sky-200 */
+  border-radius: 8px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.insightIcon {
+  font-size: 1.25rem;
+  line-height: 1;
+  color: #0284C7; /* Sky-600 */
+}
+
+.insightContent {
+  font-size: 0.9rem; /* 14.4px */
+  color: #334155; /* Slate-700 */
+  line-height: 1.6; /* Tăng chiều cao dòng cho dễ đọc văn bản dài */
+  font-weight: 500;
+  white-space: pre-line; /* QUAN TRỌNG: Giữ các dấu xuống dòng của văn bản */
+}

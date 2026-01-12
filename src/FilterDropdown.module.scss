@@ -1,52 +1,86 @@
-/* RadioDropdown.module.scss */
-
 // Google Color Palette references
 $google-grey-100: #f1f3f4;
 $google-grey-200: #e8eaed;
 $google-grey-300: #dadce0;
+$google-grey-400: #bdc1c6;
 $google-grey-800: #3c4043;
 $google-blue-600: #1a73e8;
 $google-blue-50: #e8f0fe;
 $text-primary: #202124;
 $text-secondary: #5f6368;
+$text-disabled: #9aa0a6;
 
 .container {
   position: relative;
-  max-width: 300px; // Có thể điều chỉnh hoặc bỏ để full-width
+  min-width: 160px;
   font-family: 'Roboto', 'Segoe UI', sans-serif;
   user-select: none;
+
+  // Trạng thái Disabled cho toàn bộ container
+  &.disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+
+    .trigger {
+      background-color: #f8f9fa;
+      color: $text-disabled;
+      cursor: not-allowed;
+
+      &:hover {
+        background-color: #f8f9fa;
+      }
+    }
+
+    .icon {
+      color: $google-grey-300;
+    }
+  }
 }
 
-// === Trigger Button (The closed state) ===
+// === Label (External prop) ===
+.label {
+  font-size: 12px;
+  font-weight: 500;
+  color: $text-secondary;
+  margin-bottom: 4px; // Khoảng cách nhỏ giữa label và input
+  margin-left: 2px;
+}
+
+// === Trigger Button ===
 .trigger {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 12px 16px;
-  background-color: $google-grey-100;
-  border: 1px solid transparent; // Transparent border to prevent layout shift on focus
-  border-radius: 4px; // Google standard radius (sometimes 8px for MD3)
+  padding: 10px 12px; // Adjusted slightly for compact feel
+  background-color: white;
+  border: 1px solid $google-grey-300;
+  border-radius: 4px;
   color: $text-primary;
   cursor: pointer;
-  transition: background-color 0.2s, box-shadow 0.2s;
+  transition: all 0.2s ease;
   font-size: 14px;
-  font-weight: 500;
+  height: 40px; // Fixed height for consistency
 
   &:hover {
-    background-color: darken($google-grey-100, 3%);
+    border-color: $google-grey-400;
   }
 
   &.active {
-    background-color: $google-grey-200;
-    // Tạo hiệu ứng focus gạch dưới giống Material nếu muốn,
-    // ở đây ta dùng bo góc đơn giản cho sạch.
+    background-color: $google-grey-100;
+    // box-shadow: 0 0 0 2px rgba($google-blue-600, 0.2); // Optional focus ring
   }
 
-  .label {
+  .text {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    flex: 1;
+
+    &.placeholderText {
+      color: $text-secondary;
+      font-weight: 400;
+    }
   }
 
   .icon {
@@ -55,6 +89,7 @@ $text-secondary: #5f6368;
     color: $text-secondary;
     margin-left: 8px;
     transition: transform 0.2s ease;
+    flex-shrink: 0;
 
     &.rotate {
       transform: rotate(180deg);
@@ -68,6 +103,7 @@ $text-secondary: #5f6368;
   top: calc(100% + 4px);
   left: 0;
   width: 100%;
+  min-width: 100%; // Đảm bảo không nhỏ hơn trigger
   background: white;
   border-radius: 4px;
   box-shadow: 0 5px 5px -3px rgba(0,0,0,0.2),
@@ -78,34 +114,6 @@ $text-secondary: #5f6368;
   animation: fadeIn 0.15s ease-out;
 }
 
-// === Search Bar ===
-.searchWrapper {
-  padding: 8px;
-  border-bottom: 1px solid $google-grey-200;
-  position: sticky;
-  top: 0;
-  background: white;
-  z-index: 1;
-}
-
-.searchInput {
-  width: 100%;
-  padding: 8px 12px;
-  border: 1px solid $google-grey-300;
-  border-radius: 4px;
-  font-size: 14px;
-  outline: none;
-  color: $text-primary;
-
-  &:focus {
-    border-color: $google-blue-600;
-  }
-
-  &::placeholder {
-    color: #9aa0a6;
-  }
-}
-
 // === Options List ===
 .list {
   max-height: 250px;
@@ -114,7 +122,7 @@ $text-secondary: #5f6368;
   margin: 0;
   list-style: none;
 
-  // Scrollbar styling for Chrome/Edge
+  // Custom Scrollbar
   &::-webkit-scrollbar {
     width: 6px;
   }
@@ -142,20 +150,24 @@ $text-secondary: #5f6368;
     background-color: $google-blue-50;
     color: $google-blue-600;
     font-weight: 500;
+
+    .optionLabel {
+      font-weight: 500;
+    }
+  }
+
+  .optionLabel {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .checkIcon {
     font-size: 12px;
     color: $google-blue-600;
     margin-left: 8px;
+    flex-shrink: 0;
   }
-}
-
-.empty {
-  padding: 16px;
-  text-align: center;
-  color: $text-secondary;
-  font-size: 13px;
 }
 
 @keyframes fadeIn {

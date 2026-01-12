@@ -1,5 +1,3 @@
-/* RadioDropdown.module.scss */
-
 // Google Color Palette references
 $google-grey-100: #f1f3f4;
 $google-grey-200: #e8eaed;
@@ -7,17 +5,18 @@ $google-grey-300: #dadce0;
 $google-grey-800: #3c4043;
 $google-blue-600: #1a73e8;
 $google-blue-50: #e8f0fe;
+$google-red-500: #ea4335;
 $text-primary: #202124;
 $text-secondary: #5f6368;
 
 .container {
   position: relative;
-  max-width: 300px; // Có thể điều chỉnh hoặc bỏ để full-width
+  max-width: 300px;
   font-family: 'Roboto', 'Segoe UI', sans-serif;
   user-select: none;
 }
 
-// === Trigger Button (The closed state) ===
+// === Trigger Button ===
 .trigger {
   display: flex;
   align-items: center;
@@ -25,13 +24,14 @@ $text-secondary: #5f6368;
   width: 100%;
   padding: 12px 16px;
   background-color: $google-grey-100;
-  border: 1px solid transparent; // Transparent border to prevent layout shift on focus
-  border-radius: 4px; // Google standard radius (sometimes 8px for MD3)
+  border: 1px solid transparent;
+  border-radius: 4px;
   color: $text-primary;
   cursor: pointer;
   transition: background-color 0.2s, box-shadow 0.2s;
   font-size: 14px;
   font-weight: 500;
+  min-height: 42px; // Đảm bảo chiều cao đồng nhất
 
   &:hover {
     background-color: darken($google-grey-100, 3%);
@@ -39,22 +39,26 @@ $text-secondary: #5f6368;
 
   &.active {
     background-color: $google-grey-200;
-    // Tạo hiệu ứng focus gạch dưới giống Material nếu muốn,
-    // ở đây ta dùng bo góc đơn giản cho sạch.
   }
 
   .label {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin-right: 8px;
+
+    &.placeholder {
+      color: $text-secondary;
+      font-weight: 400;
+    }
   }
 
   .icon {
     display: flex;
     align-items: center;
     color: $text-secondary;
-    margin-left: 8px;
     transition: transform 0.2s ease;
+    flex-shrink: 0;
 
     &.rotate {
       transform: rotate(180deg);
@@ -76,16 +80,15 @@ $text-secondary: #5f6368;
   z-index: 1000;
   overflow: hidden;
   animation: fadeIn 0.15s ease-out;
+  display: flex;
+  flex-direction: column;
 }
 
 // === Search Bar ===
 .searchWrapper {
   padding: 8px;
   border-bottom: 1px solid $google-grey-200;
-  position: sticky;
-  top: 0;
   background: white;
-  z-index: 1;
 }
 
 .searchInput {
@@ -100,9 +103,35 @@ $text-secondary: #5f6368;
   &:focus {
     border-color: $google-blue-600;
   }
+}
 
-  &::placeholder {
-    color: #9aa0a6;
+// === Actions Bar (New for Checkbox) ===
+.actionsBar {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 16px;
+  background-color: #fafafa;
+  border-bottom: 1px solid $google-grey-200;
+}
+
+.actionBtn {
+  background: none;
+  border: none;
+  font-size: 12px;
+  font-weight: 500;
+  color: $google-blue-600;
+  cursor: pointer;
+  padding: 4px 0;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &.clearBtn {
+    color: $text-secondary;
+    &:hover {
+      color: $google-red-500;
+    }
   }
 }
 
@@ -114,7 +143,6 @@ $text-secondary: #5f6368;
   margin: 0;
   list-style: none;
 
-  // Scrollbar styling for Chrome/Edge
   &::-webkit-scrollbar {
     width: 6px;
   }
@@ -140,14 +168,29 @@ $text-secondary: #5f6368;
 
   &.selected {
     background-color: $google-blue-50;
-    color: $google-blue-600;
-    font-weight: 500;
+    color: $google-blue-600; // Text màu xanh khi active
   }
 
-  .checkIcon {
-    font-size: 12px;
+  .optionContent {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  // Icon vuông (Checkbox)
+  .checkboxIcon, .checkboxIconUnchecked {
+    font-size: 16px;
+    margin-right: 12px;
+    flex-shrink: 0;
+  }
+
+  .checkboxIcon {
     color: $google-blue-600;
-    margin-left: 8px;
+  }
+
+  .checkboxIconUnchecked {
+    color: $text-secondary;
+    opacity: 0.6;
   }
 }
 
