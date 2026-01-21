@@ -4,14 +4,15 @@ import FilterDropdown from './FilterDropdown.jsx';
 
 // Import các sub-component
 import Superintendent from './Superintendent';
-import Sed from './sed/Sed.jsx';
+import SedDashboard from './sed/SedDashboard.jsx';
 import HopDhop from './hop/HopDhop.jsx';
 import LeadTeacher from './LeadTeacher';
 import Teacher from './Teacher';
 import Student from './Student';
 import RadioDropdown from "./RadioDropdown.jsx";
 import {classes, students} from "./mockData.js";
-
+import SuperintendentDashboard from "./SuperintendentDashboard.jsx";
+import {IoSettingsOutline} from "react-icons/io5";
 // --- MOCK DATA ---
 const MOCK_DB = {
     years: [
@@ -28,8 +29,10 @@ const MOCK_DB = {
         { value: 'CG', label: 'TDS Cầu Giấy' }
     ],
     levels: [
-        { value: 'TIEU_HOC', label: 'ES' },
-        { value: 'TRUNG_HOC', label: 'MHS' }
+        { value: 'TIEU_HOC', label: 'Chương trình tiếng Việt Tiểu học' },
+        { value: 'TIEU_HOC_EN', label: 'Chương trình tiếng Anh Tiểu học' },
+        { value: 'TRUNG_HOC', label: 'Chương trình tiếng Việt THCS/THPT' },
+        { value: 'TRUNG_HOC_EN', label: 'Chương trình tiếng Anh THCS/THPT' }
     ],
     grades: {
         'TIEU_HOC': [
@@ -76,7 +79,7 @@ const Report = () => {
         class: null,
         student: null
     });
-
+    const [showRolePopup, setShowRolePopup] = useState(false);
     // 3. Logic: Khi đổi Role, tự động set các giá trị Mặc định & Reset
     useEffect(() => {
         const newFilters = {
@@ -253,21 +256,18 @@ const Report = () => {
             if (currentRole === 'LEADER') return <div className={styles.emptyState}>Vui lòng chọn <b>Khối</b> để xem báo cáo.</div>;
             if (currentRole === 'HOP') return <div className={styles.emptyState}>Vui lòng chọn <b>Cấp học</b> để xem báo cáo.</div>;
 
-            return <Sed filters={filters} />;
+            return <SedDashboard filters={filters} />;
         }
 
         // --- LAYER 5: VIEW TỔNG ---
         // FIX: Hiển thị thông báo cho Tổng hiệu trưởng khi chưa chọn cơ sở
-        return <div className={styles.emptyState}>Vui lòng chọn <b>Cơ sở</b> để bắt đầu.</div>;
+        return <div className={styles.emptyState}><SuperintendentDashboard/></div>;
     };
 
     return (
         <div className={styles.dashboardContainer}>
 
             <div className={styles.filterBar}>
-                <RadioDropdown options={[{label: "2025 - 2026", value: '2'}]} placeholder={"2025 - 2026"}/>
-                <RadioDropdown value={'2'} options={[{label: "EXPLORE", value: '1'}, {label: "DISCOVER", value: '2'}, {label: "JOURNEY", value: '3'}]}
-                               placeholder={"DISCOVER"}/>
 
                 <FilterDropdown
                     label="Cơ sở"
@@ -279,7 +279,7 @@ const Report = () => {
                 />
 
                 <FilterDropdown
-                    label="Cấp học"
+                    label="Cấp"
                     options={MOCK_DB.levels}
                     value={filters.level}
                     onChange={(v) => handleFilterChange('level', v)}
@@ -312,9 +312,30 @@ const Report = () => {
                     placeholder="Tìm học sinh..."
                     isSearchable={true}
                 />
-                <div className={styles.roleSwitcher}>
-                    <span>[DEV] Role: </span>
-                    <RadioDropdown mw={200} value={currentRole} onChange={setCurrentRole} options={ROLES}/>
+                <div className={styles.settingsWrapper}>
+                    {/* Trigger Icon */}
+                    <div
+                        className={styles.triggerIcon}
+                        onClick={() => setShowRolePopup(!showRolePopup)}
+                        title="Cài đặt chức vụ"
+                    >
+                        <IoSettingsOutline/>
+                    </div>
+
+                    {/* Popup Content - Chỉ hiện khi showRolePopup = true */}
+                    {showRolePopup && (
+                        <div className={styles.popupContainer}>
+                            <div className={styles.roleSwitcher}>
+                                <span>[TEST] Chức vụ: </span>
+                                <RadioDropdown
+                                    mw={200}
+                                    value={currentRole}
+                                    onChange={setCurrentRole}
+                                    options={ROLES}
+                                />
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
 

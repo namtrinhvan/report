@@ -188,7 +188,7 @@ const ScatterPlotChart = ({
             },
             xAxis: {
                 type: 'value',
-                name: 'Điểm MOET (0-10)',
+                name: 'Điểm MOET',
                 nameLocation: 'middle',
                 nameGap: 25,
                 min: 0,
@@ -204,7 +204,7 @@ const ScatterPlotChart = ({
             },
             yAxis: {
                 type: 'value',
-                name: 'Điểm TDS (0-4.0)',
+                name: 'Điểm TDS',
                 nameLocation: 'middle',
                 nameGap: 35,
                 nameRotate: 90,
@@ -252,24 +252,7 @@ const ScatterPlotChart = ({
                             },
 
                             // 2. ĐƯỜNG TƯƠNG QUAN (Calculated Trend Line)
-                            ...regressionLineData.map(line => ([
-                                {
-                                    ...line[0],
-                                    label: {
-                                        show: true,
-                                        position: 'middle',
-                                        color: '#F79009', // Màu cam nổi bật
-                                        fontSize: 12,
-                                        fontWeight: 'bold'
-                                    },
-                                    lineStyle: {
-                                        type: 'solid',
-                                        color: '#F79009',
-                                        width: 2,
-                                    }
-                                },
-                                { ...line[1] }
-                            ]))
+
                         ]
                     }
                 }
@@ -279,55 +262,8 @@ const ScatterPlotChart = ({
 
     return (
         <div className={styles.chartWrapper}>
-            {/* --- CONTROLS SECTION --- */}
-            <div className={styles.chartControls}>
-                <div className={styles.controlGroup}>
-                    <span className={styles.label}>Thời gian:</span>
-                    <RadioDropdown
-                        placeholder={selectedTime} // Hiển thị giá trị đã chọn
-                        // Note: Logic Dropdown cần được bind đúng với state nếu component RadioDropdown hỗ trợ
-                    />
-                </div>
-
-                <div className={styles.controlGroup}>
-                    <span className={styles.label}>Khối:</span>
-                    <RadioDropdown
-                        className={styles.dropdown}
-                        options={GRADE_OPTIONS}
-                        value={selectedGrade}
-                        onChange={setSelectedGrade}
-                        placeholder="Chọn khối"
-                    />
-                </div>
-
-                <div className={styles.controlGroup}>
-                    <span className={styles.label}>Môn học:</span>
-                    <RadioDropdown
-                        className={styles.dropdownWide}
-                        options={MAPPED_SUBJECTS}
-                        value={selectedSubject}
-                        onChange={setSelectedSubject}
-                        placeholder="Chọn môn"
-                    />
-                </div>
-            </div>
-
-            {/* --- CHART SECTION --- */}
             <div className={styles.chartContainer}>
-                <div className={styles.chartHeader}>
-                    <h4 className={styles.chartTitle}>
-                        Biểu đồ Tương quan điểm MOET và TDS - {selectedTime}
-                    </h4>
-                    <div className={styles.chartLegend}>
-                        <span className={styles.legendItem}>
-                            <span className={styles.dot} style={{background: '#0088FE'}}></span> Học sinh
-                        </span>
-                        <span className={styles.legendItem}>
-                            <span className={styles.line} style={{background: '#F79009'}}></span> Đường tương quan
-                        </span>
-                    </div>
-                </div>
-
+                <h3>Hệ số tương quan: 0.85</h3>
                 <ReactECharts
                     option={getOption}
                     style={{ height: '500px', width: '100%' }}

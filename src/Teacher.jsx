@@ -5,7 +5,7 @@ import GenericPieChart from "./GenericPieChart.jsx";
 import CheckboxDropdown from "./CheckboxDropdown.jsx";
 
 const Teacher = () => {
-    const semesters = ["Giữa HKI","Cúối HKI","Giữa HKII","Cúối HKII", 'HK1', "HK2"]
+    const semesters = ["Giữa HKI", "Cúối HKI", "Giữa HKII", "Cúối HKII", 'HK1', "HK2"]
     const students = [
         "8D VN MATH 2B",
         "Trần Bảo Minh",
@@ -58,29 +58,48 @@ const Teacher = () => {
             >
                 <GenericBarChart
                     labels={semesters}
+                    title={"Báo cáo hoàn thành mục tiêu cơ sở về tỉ lệ học sinh đạt từ 7 trở lên môn VN TOÁN"}
                     referenceLineValue={80}
+                    fluctuate={true}
                 >
-                    <RadioDropdown/>
-                    <RadioDropdown/>
+                    <RadioDropdown value={'2'} placeholder={"Tỉ lệ học sinh đạt từ 7 trở lên"}
+                                   options={[
+                                       {label: 'Tỉ lệ học sinh đạt từ 7 trở lên', value: '2'},
+                                       {label: 'Tỉ lệ học sinh đạt dưới 5', value: '1'},
+                                       {label: 'Tỉ lệ học sinh đạt từ PR trở lên', value: '1'},
+                                       {label: 'Tỉ lệ học sinh đạt dưới EM', value: '1'},
+                                   ]}
+                    />
                 </GenericBarChart>
 
-                <GenericPieChart labels={['PR', 'EM', 'NOV']}/>
+                <GenericPieChart title={"Báo cáo tỷ lệ kết quả học tập theo thang điểm TDS"} labels={['PR', 'EM', 'NOV']}/>
 
                 <div style={{gridColumn: "1 / -1"}}>
                     <GenericBarChart
                         labels={['ĐẠI SỐ', "HÌNH HỌC VÀ ĐO LƯỜNG", "XÁC SUẤT THỐNG KÊ", "DỰ ÁN VÀ TRẢI NGHIỆM"]}
                         referenceLineValue={80}
-                        subLabels={['Q1', 'Q2', 'Q3', 'Q4']}
+                        title={"Báo cáo hoàn thành mục tiêu cơ sở về tỉ lệ học sinh đạt Từ PR trở lên các trọng tâm"}
+                        subLabels={['Q1', 'Q2', 'Q3']}
                     >
-                        <CheckboxDropdown placeholder={"Đã chọn Q1, Q2, Q3 và Q4"}/>
+                        <RadioDropdown value={'2'} placeholder={"Tỉ lệ học sinh đạt từ 7 trở lên"}
+                                       options={[
+                                           {label: 'Tỉ lệ học sinh đạt từ 7 trở lên', value: '2'},
+                                           {label: 'Tỉ lệ học sinh đạt dưới 5', value: '1'},
+                                           {label: 'Tỉ lệ học sinh đạt từ PR trở lên', value: '1'},
+                                           {label: 'Tỉ lệ học sinh đạt dưới EM', value: '1'},
+                                       ]}
+                        />
+                        <CheckboxDropdown placeholder={"Đã chọn Q1, Q2 và Q4"}/>
                     </GenericBarChart>
                 </div>
             </div>
 
             <GenericBarChart
                 // title="Tiến độ hoàn thành KPI"
+                title={"Báo cáo kết quả trọng tâm HÌNH HỌC VÀ ĐO LƯỜNG của tất cả học sinh theo kì"}
                 labels={students}
-                referenceLineValue={80}
+                system={true}
+                referenceLineValue={3.2}
                 subLabels={['Q1', 'Q2']}
             >
                 {/*//Chọn FP và hiển thị điểm cho từng học sinh (mỗi học sinh là 1 cột).OK*/}
@@ -91,6 +110,7 @@ const Teacher = () => {
                 // title="Tiến độ hoàn thành KPI"
                 labels={tieuChuanNangLuc}
                 referenceLineValue={80}
+                title={"Báo cáo hoàn thành mục tiêu cơ sở về tỉ lệ học sinh đạt từ PR trở lên các tiêu chuẩn năng lực"}
                 subLabels={['Q1', 'Q2', 'Q3', 'Q4']}
             >
                 {/*//Chọn 1 hoặc nhiều FP và hiển thị điểm cả lớp cho từng PS theo các kỳ và quarter. OK*/}
@@ -99,12 +119,14 @@ const Teacher = () => {
             <GenericBarChart
                 // title="Tiến độ hoàn thành KPI"
                 labels={students}
-                referenceLineValue={80}
-                subLabels={['Q1', 'Q2', 'Q3', 'Q4']}
+                title={"Báo cáo kết quả tiêu chuẩn năng lực môn học của tất cả học sinh theo kì"}
+                referenceLineValue={3.2}
+                system={true}
+                subLabels={['Q2', 'Q3', 'Q4']}
             >
                 {/*//Chọn PS và hiển thị điểm cho từng học sinh (mỗi học sinh là 1 cột). OK*/}
                 <RadioDropdown placeholder={"Học sinh có thể nắm được các kiến thức về giải tích đại số."}/>
-                <CheckboxDropdown placeholder={"Đã chọn Q1, Q2, Q3 và Q4"}/>
+                <CheckboxDropdown placeholder={"Đã chọn Q2, Q3 và Q4"}/>
             </GenericBarChart>
 
         </div>

@@ -3,6 +3,7 @@ import GenericBarChart from "./GenericBarChart.jsx";
 import RadioDropdown from "./RadioDropdown.jsx";
 import {Scatter} from "recharts";
 import ScatterPlotChart from "./ScatterPlotChart.jsx";
+import CheckboxDropdown from "./CheckboxDropdown.jsx";
 
 const Student = () => {
     const learningOutcomes = [
@@ -34,22 +35,24 @@ const Student = () => {
             <GenericBarChart
                 // title="Tiến độ hoàn thành KPI"
                 labels={['ĐẠI SỐ', "HÌNH HỌC VÀ ĐO LƯỜNG", "XÁC SUẤT THỐNG KÊ", "DỰ ÁN VÀ TRẢI NGHIỆM"]}
-                referenceLineValue={80}
-                subLabels={['Q1', 'Q2', 'Q3', 'Q4']}
+                referenceLineValue={3.2}
+                system={true}
+                subLabels={['Q2', 'Q3', 'Q4']}
             >
                 {/*//Chọn học sinh, hiển thị tất cả fp của môn đó theo các kỳ và qarter. OK*/}
-                <RadioDropdown/>
-                <RadioDropdown/>
+                <RadioDropdown options={[{label: "VN VẬT LÝ", value: '2'}, {label: "VN HÓA HỌC", value: '2'}]}
+                               placeholder={"VN TOÁN"}/> <CheckboxDropdown placeholder={"Đã chọn Q2, Q3 và Q4"}/>
             </GenericBarChart>
             <GenericBarChart
                 // title="Tiến độ hoàn thành KPI"
                 labels={tieuChuanNangLuc}
-                referenceLineValue={80}
-                subLabels={['Q1', 'Q2', 'Q3', 'Q4']}
+                referenceLineValue={3.2}
+                system={true}
+                subLabels={['Q2', 'Q3', 'Q4']}
             >
                 {/*//Chọn học sinh, chọn 1 hoặc nhiều FP, lọc và hiển thị tất cả ps của môn đó theo các kỳ và quarter*/}
-                <RadioDropdown/>
-                <RadioDropdown/>
+                <RadioDropdown options={[{label: "VN VẬT LÝ", value: '2'}, {label: "VN HÓA HỌC", value: '2'}]}
+                               placeholder={"VN TOÁN"}/> <CheckboxDropdown placeholder={"Đã chọn Q2, Q3 và Q4"}/>
             </GenericBarChart>
         </div>
     );

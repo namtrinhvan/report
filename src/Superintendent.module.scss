@@ -1,0 +1,365 @@
+// Variables
+$bg-color: #f9fafb;
+$card-bg: #ffffff;
+$text-primary: #111827;
+$text-secondary: #6b7280;
+$border-color: #e5e7eb;
+$success-color: #10b981;
+$warning-color: #f59e0b;
+$danger-color: #ef4444;
+$primary-color: #3B82F6;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  font-family: 'Inter', sans-serif;
+  position: relative;
+  width: 100%;
+  background-color: $bg-color;
+  min-height: 100vh;
+}
+
+// --- Header Section ---
+.headerSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 1px solid $border-color;
+  padding-bottom: 20px;
+
+  .headerTitle {
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: $text-primary;
+      margin: 0;
+    }
+    p {
+      color: $text-secondary;
+      font-size: 0.875rem;
+      margin-top: 4px;
+    }
+  }
+
+  .headerActions {
+    display: flex;
+    gap: 16px;
+  }
+}
+
+.summaryBox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid $border-color;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+
+  .iconBox {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #E0E7FF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4F46E5;
+  }
+
+  .summaryLabel {
+    font-size: 0.75rem;
+    color: $text-secondary;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .summaryValue {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: $text-primary;
+    line-height: 1;
+  }
+}
+
+// --- KPI Grid ---
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); // 3 Cards
+  gap: 20px;
+}
+
+.kpiCard {
+  background: $card-bg;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid $border-color;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  min-height: 150px;
+  transition: box-shadow 0.2s;
+
+  &:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  // Wrapper nút Setting + Popup
+  .cardActionWrapper {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 20; // Cao hơn content khác
+  }
+
+  // Nút Cog Icon
+  .cardMenuBtn {
+    background: transparent;
+    border: none;
+    color: $text-secondary;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.2s;
+
+    // YÊU CẦU: LUÔN HIỂN THỊ (Opacity 1)
+    opacity: 1;
+
+    &:hover, &.active {
+      background-color: #f3f4f6;
+      color: $primary-color;
+    }
+  }
+
+  .kpiHeader {
+    margin-bottom: 12px;
+    .kpiLabelRow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .kpiLabel {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: $text-secondary;
+      text-transform: uppercase;
+    }
+    .kpiIcon {
+      color: $text-secondary;
+      font-size: 1.2rem;
+    }
+  }
+
+  .kpiValue {
+    font-size: 2rem;
+    font-weight: 700;
+    color: $text-primary;
+    line-height: 1;
+    margin-bottom: 6px;
+
+    .unit {
+      font-size: 1rem;
+      color: #9ca3af;
+      font-weight: 400;
+    }
+  }
+
+  .kpiTrend {
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    &.positive { color: $success-color; }
+    &.negative { color: $danger-color; }
+    &.neutral { color: $text-secondary; }
+
+    .trendLabel {
+      color: $text-secondary;
+      font-weight: 400;
+      font-size: 0.8rem;
+    }
+  }
+}
+
+// --- POPUP MENU (Dùng chung cho KPI và Chart Extra Filter) ---
+.popupWrapper, .filterPopupWrapper {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 6px;
+  z-index: 50;
+  width: 280px;
+  animation: fadeIn 0.15s ease-out;
+}
+
+.popupMenu {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border: 1px solid $border-color;
+  display: flex;
+  flex-direction: column;
+
+  .popupHeader {
+    padding: 10px 14px;
+    background-color: #f9fafb;
+    border-bottom: 1px solid $border-color;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: $text-primary;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .closeBtn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #9ca3af;
+      &:hover { color: $danger-color; }
+    }
+  }
+
+  .popupBody {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .popupFooter {
+    padding: 10px 14px;
+    border-top: 1px solid $border-color;
+    display: flex;
+    justify-content: flex-end;
+
+    .applyBtn {
+      background-color: $primary-color;
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      &:hover { background-color: darken($primary-color, 10%); }
+    }
+  }
+}
+
+// Controls trong popup
+.controlGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: $text-secondary;
+  }
+  .popupSelect {
+    padding: 8px;
+    border: 1px solid $border-color;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    width: 100%;
+    &:focus { outline: 2px solid rgba($primary-color, 0.2); border-color: $primary-color; }
+  }
+}
+.checkboxWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  label { font-size: 0.85rem; color: $text-primary; }
+}
+
+// --- MAIN CHARTS SECTION ---
+.mainSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr; // Cột trái to gấp đôi cột phải
+  gap: 24px;
+}
+
+// Chart Container Wrapper
+.chartSectionWrapper {
+  background: $card-bg;
+  border-radius: 12px;
+  border: 1px solid $border-color;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .chartHeader {
+    padding: 16px 20px;
+    border-bottom: 1px solid $border-color;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .chartTitle {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 700;
+      color: $text-primary;
+    }
+
+    .chartControls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+  }
+
+  .chartBody {
+    padding: 20px;
+    flex: 1;
+    min-height: 350px;
+  }
+}
+
+// Controls for charts
+.iconBtn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid $border-color;
+  border-radius: 6px;
+  color: $text-secondary;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover, &.active {
+    background-color: #f3f4f6;
+    color: $primary-color;
+    border-color: darken($border-color, 10%);
+  }
+}
+
+.simpleSelect {
+  padding: 8px 12px;
+  border: 1px solid $border-color;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  background-color: #fff;
+  cursor: pointer;
+  &:focus { outline: none; border-color: $primary-color; }
+}
+
+.relativeContainer {
+  position: relative; // Để neo popup absolute
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}

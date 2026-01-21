@@ -65,7 +65,7 @@ const generateSchoolData = () => {
             classes.push({
                 value: className,
                 label: className,
-                grade: grade.toString(),
+                grade: grade.toString(), // Ép sang String ở đây
                 level: level,
                 campus: 'THT'
             });

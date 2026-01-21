@@ -118,19 +118,6 @@ const CheckboxDropdown = ({
                         width: '100%'
                     }}
                 >
-                    {/* Search Bar */}
-                    <div className={styles.searchWrapper}>
-                        <input
-                            type="text"
-                            className={styles.searchInput}
-                            placeholder="Search..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            autoFocus
-                        />
-                    </div>
-
-                    {/* Quick Actions (Select All / Clear) */}
                     {filteredOptions.length > 0 && (
                         <div className={styles.actionsBar}>
                             <button

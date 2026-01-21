@@ -26,26 +26,29 @@ const HopDhop = () => {
         <div>
             <div>
                 <GenericBarChart
+                    fluctuate={true}
+                    subLabels={['Q1', 'Q2']}
                     // title="Tiến độ hoàn thành KPI"
-                    title={"Báo cáo hoàn thành mục tiêu KPI về tỉ lệ học sinh đạt từ 7 trở lên các môn học"}
+                    title={"Báo cáo hoàn thành mục tiêu cơ sở về tỉ lệ học sinh đạt từ 7 trở lên các môn học"}
                     labels={subjects}
 
                     data={realData}
                     referenceLineValue={80} // Đường KPI tại 80%
                 >
-                    <RadioDropdown placeholder={"KPI MOET: Tỉ lệ học sinh đạt từ 7 trở lên"}/>
+                    <RadioDropdown placeholder={"Tỉ lệ học sinh đạt từ 7 trở lên"}/>
                     <RadioDropdown placeholder={"Khối 11"}/>
-                    <CheckboxDropdown placeholder={"Đã chọn Q1"}/>
+                    <CheckboxDropdown placeholder={"Đã chọn Q1 và Q2"}/>
                 </GenericBarChart>
                 <GenericBarChart
-                    title={"Báo cáo hoàn thành mục tiêu KPI về tỉ lệ học sinh đạt từ 7 trở lên các khối học"}
+                    title={"Báo cáo hoàn thành mục tiêu cơ sở về tỉ lệ học sinh đạt từ 7 trở lên các khối học"}
                     labels={khoiLop}
-
+                    subLabels={['Q1']}
+                    fluctuate={true}
                     // title="Tiến độ hoàn thành KPI"
                     data={realData}
                     referenceLineValue={80} // Đường KPI tại 80%
                 >
-                    <RadioDropdown placeholder={"KPI MOET: Tỉ lệ học sinh đạt từ 7 trở lên"}/>
+                    <RadioDropdown placeholder={"Tỉ lệ học sinh đạt từ 7 trở lên"}/>
                     <RadioDropdown placeholder={"VN TOÁN"}/>
                     <CheckboxDropdown placeholder={"Đã chọn Q1 và Q2"}/>
                 </GenericBarChart>
@@ -58,7 +61,7 @@ const HopDhop = () => {
                     subLabels={['Q2', 'Q3']}
 
                 >
-                    <RadioDropdown placeholder={"KPI MOET: Tỉ lệ học sinh đạt từ PR trở lên"}/>
+                    <RadioDropdown placeholder={"Tỉ lệ học sinh đạt từ PR trở lên"}/>
                     <RadioDropdown placeholder={"Khối 3"}/>
                     <RadioDropdown placeholder={"TIẾNG VIỆT"}/>
                     <CheckboxDropdown placeholder={"Đã chọn Q2 và Q3"}/>
@@ -68,6 +71,8 @@ const HopDhop = () => {
                     // title="Tiến độ hoàn thành KPI"
                     labels={['Khối 3','3 Miami', '3 Washington', '3 Caracas', '3 Beijing']}
                     data={realData}
+                    system={true}
+                    referenceLineValue={3}
                 >
                     <RadioDropdown placeholder={"Khối 3"}/>
                     <RadioDropdown placeholder={"CÚ PHÁP"}/>

@@ -1,7 +1,66 @@
 * {
   box-sizing: border-box;
 }
+.settingsWrapper {
+  position: relative; // Quan trọng: làm mốc toạ độ cho popup
+  display: inline-block; // Hoặc flex tuỳ bố cục cha
+  margin-left: auto;
+  margin-bottom: auto;
+  font-size: 0.5rem;
+  .triggerIcon {
+    cursor: pointer;
+    font-size: 24px; // Điều chỉnh kích thước icon
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
 
+    &:hover {
+      color: #1890ff; // Màu khi hover (tuỳ chọn)
+    }
+  }
+
+  .popupContainer {
+    position: absolute;
+    top: calc(100% + 8px); // Cách icon 8px về phía dưới
+    right: 0; // Căn phải thẳng hàng với icon (hoặc để left: 0 nếu muốn căn trái)
+    z-index: 1000; // Đảm bảo nổi lên trên các thành phần khác
+
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); // Tạo bóng đổ nhẹ
+    border: 1px solid #e0e0e0;
+    padding: 12px 16px;
+    min-width: 300px; // Đảm bảo đủ rộng cho RadioDropdown
+
+    // Mũi tên trỏ lên (Tuỳ chọn - tạo cảm giác gắn liền với icon)
+    &::before {
+      content: '';
+      position: absolute;
+      top: -6px;
+      right: 6px; // Điều chỉnh theo vị trí icon
+      width: 12px;
+      height: 12px;
+      background-color: #fff;
+      border-left: 1px solid #e0e0e0;
+      border-top: 1px solid #e0e0e0;
+      transform: rotate(45deg);
+    }
+
+    // Style cũ của roleSwitcher được lồng vào đây
+    .roleSwitcher {
+      display: flex;
+      flex-direction: column; // Xếp dọc cho gọn trong popup
+      gap: 8px;
+
+      span {
+        font-weight: 600;
+        font-size: 14px;
+        color: #666;
+      }
+    }
+  }
+}
 .dashboardContainer {
   display: flex;
   flex-direction: column;
@@ -65,14 +124,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
   color: #637381;
   font-size: 16px;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-  margin-top: 20px; /* Tạo khoảng cách nếu cần */
-
+  width: 100%;
+  height: 100%;
   b {
     color: #212b36;
   }

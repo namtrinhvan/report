@@ -83,20 +83,6 @@ const RadioDropdown = ({
                     className={styles.dropdown}
                     style={{ zIndex: zIndex }}
                 >
-                    {/* Search Bar */}
-                    <div className={styles.searchWrapper}>
-                        <input
-                            ref={searchInputRef}
-                            type="text"
-                            className={styles.searchInput}
-                            placeholder="Search..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            onClick={(e) => e.stopPropagation()}
-                        />
-                    </div>
-
-                    {/* Options List */}
                     <ul className={styles.list}>
                         {filteredOptions.length > 0 ? (
                             filteredOptions.map((option) => {
